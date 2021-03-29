@@ -61,28 +61,40 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password can't be blank", "Password confirmation doesn't match Password")
       end
       it 'passwordが5文字以下では登録できない' do
-        @user.password = '12345'
-        @user.password_confirmation = '12345'
+        @user.password = 'aa345'
+        @user.password_confirmation = 'aa345'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'passwordが存在してもpassword_confirmationが空では登録できない' do
-        @user.password = '123456'
+        @user.password = 'aa1234'
         @user.password_confirmation = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
       it 'passwordとpassword_confirmationの値が異なると登録できない' do
-        @user.password = '123456'
-        @user.password_confirmation = '1234567'
+        @user.password = 'aa1234'
+        @user.password_confirmation = 'aa12345'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it 'passwordは半角英数混合(半角英語のみ)では登録できない' do
+      it 'passwordは半角英字のみでは登録できない' do
         @user.password = 'aaaaaa'
         @user.password_confirmation = 'aaaaaa'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password Password Include both letters and numbers')
+      end
+      it 'passwordは半角数字のみでは登録できない' do
+        @user.password = '123456'
+        @user.password_confirmation = '123456'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Password Include both letters and numbers")
+      end
+      it 'passwordは全角英数字のみでは登録できない' do
+        @user.password = 'ａａ１１１１'
+        @user.password_confirmation = 'ａａ１１１１'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Password Include both letters and numbers")
       end
       it 'last_nameが空では登録できない' do
         @user.last_name = ''
