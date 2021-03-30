@@ -11,7 +11,8 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :ship_date_id
     end
-    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid. Input 300 ~ 9,999,999 numerical value." }
+    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'is invalid. Input 300 ~ 9,999,999 numerical value. '}
+
     validates :image
   end
 
