@@ -2,11 +2,11 @@ FactoryBot.define do
   factory :item do
       product { 'テスト' }
       product_description{ 'テスト中' }
-      category { 2 }
-      status { 2 }
-      ship_base { 2 }
-      prefecture { 2 }
-      ship_date { 2 }
+      category_id { 2 }
+      status_id { 2 }
+      ship_base_id { 2 }
+      prefecture_id { 2 }
+      ship_date_id { 2 }
       price { 1000 }
 
       #生成するダミーデータに画像を添付
