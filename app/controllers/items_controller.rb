@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
-  
+  #ログインしていないユーザーは、ログイン画面に遷移する
+  before_action :authenticate_user!, only: :new
+
   #トップページを表示
   def index
   end

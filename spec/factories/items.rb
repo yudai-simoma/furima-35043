@@ -8,6 +8,8 @@ FactoryBot.define do
       prefecture_id { 2 }
       ship_date_id { 2 }
       price { 1000 }
+      #userとのアソシエーション
+      association :user
 
       #生成するダミーデータに画像を添付
       after(:build) do |item|

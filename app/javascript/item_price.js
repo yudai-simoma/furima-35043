@@ -16,7 +16,6 @@ window.addEventListener('load', () => {
     const Price = inputValue * Tax;
     const allTaxPrice = Math.floor(Price);
     addTaxDom.innerHTML = allTaxPrice
-    console.log(addTaxDom.innerHTML)
   })
   
   // 販売利益が表示される数値をprofitInputという変数に格納する
@@ -28,6 +27,5 @@ window.addEventListener('load', () => {
     const allTaxPrice = Math.floor(Price);
     const profitPrice = inputValue - allTaxPrice;
     profitDom.innerHTML = Math.floor(profitPrice);
-    console.log(profitDom.innerHTML)
   })
 });

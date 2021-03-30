@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
     before do
-      user = FactoryBot.create(:user)
-      @item = FactoryBot.build(:item, user_id: user.id)
+      @item = FactoryBot.build(:item)
     end
 
   describe '商品出品機能' do
@@ -118,8 +117,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input 300 ~ 9,999,999 numerical value. ")
       end
-      it 'priceの値が¥300~¥9,999,999以外だと保存できないこと' do
+      it 'priceの値が299円以下では出品できないこと' do
         @item.price = 200
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input 300 ~ 9,999,999 numerical value. ")
+      end
+      it 'priceの値が10,000,000円以上では出品できないこと' do
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input 300 ~ 9,999,999 numerical value. ")
       end
