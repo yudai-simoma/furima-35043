@@ -11,7 +11,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :ship_date_id
     end
-    validates :price
+    validates :price, format: { with:/\d{3,7}/, message: '' }
     validates :image
   end
 
