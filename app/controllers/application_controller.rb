@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :basic_auth
   # deviseのストロングパラメーターを使用出来るようにした
   before_action :configure_permitted_parameters, if: :devise_controller?
+  #ログインしていないユーザーは、ログイン画面に遷移する
+  before_action :authenticate_user!, only: :new
 
   private
 
