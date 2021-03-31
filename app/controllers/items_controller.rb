@@ -4,6 +4,8 @@ class ItemsController < ApplicationController
 
   #トップページを表示
   def index
+    #商品の情報を代入かつ新しい順に表示
+    @items = Item.all.order("product DESC")
   end
 
   #商品出品ページを表示
