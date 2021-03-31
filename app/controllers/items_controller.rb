@@ -22,6 +22,11 @@ class ItemsController < ApplicationController
       render new_item_path
     end
   end
+
+  #商品詳細ページを表示
+  def show
+
+  end
 end
 
 private
