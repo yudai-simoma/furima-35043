@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   #ログイン状態によって表示するページを切り替えるコードでログインしていなければ、ログイン画面に遷移さる。
   before_action :authenticate_user!, only: [:new, :create, :edit]
-  #ログインしていて、出品したユーザーとログインユーザーが違かったら編集ページに行けないように制限している
-  before_action :move_to_index, only: [:edit, :update]
   #各アクションで使用しているコードを１つにまとめる
   before_action :set_item, only: [:show, :edit, :update]
+  #ログインしていて、出品したユーザーとログインユーザーが違かったら編集ページに行けないように制限している
+  before_action :move_to_index, only: [:edit, :update]
 
   # トップページを表示
   def index
@@ -56,15 +56,14 @@ private
                                 :ship_date_id, :price, :image).merge(user_id: current_user.id)
   end
 
-  #編集ページにアクセスする際、投稿したユーザー出ないとアクセスでいないように条件分岐している
-  def move_to_index
-    @item = Item.find(params[:id])
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
-    end
-  end
-
   #before_actionで同じコードをまとめた
   def set_item
     @item = Item.find(params[:id])
+  end
+  
+  #編集ページにアクセスする際、投稿したユーザー出ないとアクセスでいないように条件分岐している
+  def move_to_index
+    unless current_user.id == @item.user_id
+      redirect_to action: :index
+    end
   end
