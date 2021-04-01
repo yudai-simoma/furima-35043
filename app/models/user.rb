@@ -25,4 +25,5 @@ class User < ApplicationRecord
 
   # アソシエーションを記載
   has_many :items
+  has_many :purchasers
 end
