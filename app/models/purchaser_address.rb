@@ -1,0 +1,3 @@
+class PurchaserAddress
+
+end
