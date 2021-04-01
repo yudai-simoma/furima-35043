@@ -4,14 +4,11 @@ before_action :authenticate_user!, except: :index
  
   #商品購入ページを表示
   def index
-  end
-
-  #商品購入アクション
-  def new
+    @item = Item.find(params[:item_id])
   end
 
   #商品購入の保存
   def create
-    binding.pry
+
   end
 end

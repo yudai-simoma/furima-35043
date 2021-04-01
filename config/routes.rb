@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   #商品出品機能に必要な7つのアクション全て
   resources :items
   #商品購入に必要なアクション
-  resources :purchasers, only: [:index, :new, :create]
+  resources :items do
+    resources :purchasers, only: [:index, :create]
+  end
 end
