@@ -49,6 +49,7 @@ class ItemsController < ApplicationController
 
   #出品した商品を削除する
   def destroy
+    #before_actionで呼び出している
     if @item.destroy
       redirect_to root_path
     end
