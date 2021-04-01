@@ -35,7 +35,7 @@
     <% end %>
 
     <% if user_signed_in? && current_user.id != @item.user_id %>
-    <%= link_to "購入画面に進む", purchasers_path ,class:"item-red-btn"%>
+    <%= link_to "購入画面に進む", item_purchasers_path(@item.id), class:"item-red-btn"%>
     <% end %>
     <%# /ログイン状態かつ出品者かどうかの条件いよって表示するボタンを決めている %>
     
