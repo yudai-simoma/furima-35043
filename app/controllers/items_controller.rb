@@ -2,7 +2,9 @@ class ItemsController < ApplicationController
   #ログイン状態によって表示するページを切り替えるコードでログインしていなければ、ログイン画面に遷移さる。
   before_action :authenticate_user!, only: [:new, :create, :edit]
   #ログインしていて、出品したユーザーとログインユーザーが違かったら編集ページに行けないように制限している
-  before_action :move_to_index, only: :edit
+  before_action :move_to_index, only: [:edit, :update]
+  #各アクションで使用しているコードを１つにまとめる
+  before_action :set_item, only: [:show, :edit, :update]
 
   # トップページを表示
   def index
@@ -27,17 +29,17 @@ class ItemsController < ApplicationController
 
   # 商品詳細ページを表示
   def show
-    @item = Item.find(params[:id])
+    #before_actionで呼び出している
   end
 
   #編集ページを表示
   def edit
-    @item = Item.find(params[:id])
+    #before_actionで呼び出している
   end
 
   #出品情報が更新されたら、保存される
   def update
-    @item = Item.find(params[:id])
+    #before_actionで呼び出している
       if @item.update(item_params)
         redirect_to root_path
       else
@@ -60,4 +62,9 @@ private
     unless current_user.id == @item.user_id
       redirect_to action: :index
     end
+  end
+
+  #before_actionで同じコードをまとめた
+  def set_item
+    @item = Item.find(params[:id])
   end
