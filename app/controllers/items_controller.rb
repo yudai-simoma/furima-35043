@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
-  # ログインしていないユーザーは、ログイン画面に遷移する
-  before_action :authenticate_user!, only: [:new, :create]
+  #ログイン状態によって表示するページを切り替えるコードでログインしていなければ、ログイン画面に遷移さる。
+  before_action :authenticate_user!, only: [:new, :create, :edit]
+  #各アクションで使用しているコードを１つにまとめる
+  before_action :set_item, only: [:show, :edit, :update]
+  #ログインしていて、出品したユーザーとログインユーザーが違かったら編集ページに行けないように制限している
+  before_action :move_to_index, only: [:edit, :update]
 
   # トップページを表示
   def index
@@ -25,13 +29,41 @@ class ItemsController < ApplicationController
 
   # 商品詳細ページを表示
   def show
-    @item = Item.find(params[:id])
+    #before_actionで呼び出している
+  end
+
+  #編集ページを表示
+  def edit
+    #before_actionで呼び出している
+  end
+
+  #出品情報が更新されたら、保存される
+  def update
+    #before_actionで呼び出している
+      if @item.update(item_params)
+        redirect_to root_path
+      else
+        render :edit             
+      end
   end
 end
 
 private
 
-def item_params
-  params.require(:item).permit(:product, :product_description, :category_id, :status_id, :ship_base_id, :prefecture_id,
-                               :ship_date_id, :price, :image).merge(user_id: current_user.id)
-end
+  #imteモデルの情報から所得する制限をかけた
+  def item_params
+    params.require(:item).permit(:product, :product_description, :category_id, :status_id, :ship_base_id, :prefecture_id,
+                                :ship_date_id, :price, :image).merge(user_id: current_user.id)
+  end
+
+  #before_actionで同じコードをまとめた
+  def set_item
+    @item = Item.find(params[:id])
+  end
+  
+  #編集ページにアクセスする際、投稿したユーザー出ないとアクセスでいないように条件分岐している
+  def move_to_index
+    unless current_user.id == @item.user_id
+      redirect_to action: :index
+    end
+  end
