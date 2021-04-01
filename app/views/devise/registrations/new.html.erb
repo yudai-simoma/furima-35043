@@ -1,5 +1,9 @@
+<%# 新規登録ページ %>
+
+<%# ヘッダー部分の呼び出し %>
 <%= render "shared/second-header"%>
 
+<%# 新規登録の入力フォーム作成、userモデルへ情報を移行 %>
 <%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
 
 <div class='form-wrap'>
@@ -9,8 +13,10 @@
     </h1>
   </div>
 
+  <%# エラー文が出るように、部分テンプレートを呼び出し %>
   <%= render 'shared/error_messages', model: f.object %>
 
+  <%# /新規登録の際入力する値 %>
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">ニックネーム</label>
@@ -73,6 +79,7 @@
       <label class="form-text">生年月日</label>
       <span class="indispensable">必須</span>
     </div>
+    <%# 生年月日の入力欄 %>
     <div class='input-birth-wrap'>
       <%= raw sprintf(
                   f.date_select(
@@ -96,10 +103,13 @@
     </h2>
   </div>
   <div class='register-btn'>
+    <%# 会員登録ボタン %>
     <%= f.submit "会員登録" ,class:"register-red-btn" %>
   </div>
+  <%# /新規登録の際入力する値 %>
   <p class='register-info'>本人情報の登録について</p>
 </div>
 <% end %>
 
+<%# フッターの呼び出し %>
 <%= render "shared/second-footer"%>

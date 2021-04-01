@@ -1,3 +1,4 @@
+<%# 商品出品ページ %>
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
@@ -7,6 +8,7 @@
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item, local: true do |f| %>
 
+    <%# 正しく保存されない場合エラーが出るよう、部分テンプレートを呼び出している %>
     <%= render 'shared/error_messages', model: f.object %>
 
     <%# 出品画像 %>
@@ -136,6 +138,7 @@
     <%# /注意書き %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
+      <%# 出品ボタン %>
       <%= f.submit "出品する" ,class:"sell-btn" %>
       <%=link_to 'もどる', root_path, class:"back-btn" %>
     </div>
