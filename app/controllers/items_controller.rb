@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   #ログイン状態によって表示するページを切り替えるコードでログインしていなければ、ログイン画面に遷移さる。
-  before_action :authenticate_user!, only: [:new, :create, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   #各アクションで使用しているコードを１つにまとめる
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   #ログインしていて、出品したユーザーとログインユーザーが違かったら編集ページに行けないように制限している
-  before_action :move_to_index, only: [:edit, :update]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   # トップページを表示
   def index
@@ -49,7 +49,6 @@ class ItemsController < ApplicationController
 
   #出品した商品を削除する
   def destroy
-    item = Item.find(params[:id])
     if item.destroy
       redirect_to root_path
     end
