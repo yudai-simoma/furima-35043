@@ -29,6 +29,16 @@ class ItemsController < ApplicationController
   end
 end
 
+#編集ページを表示
+def edit
+  
+end
+
+#出品情報が更新されたら、保存される
+def update
+  
+end
+
 private
 
 def item_params
