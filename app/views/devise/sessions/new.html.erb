@@ -1,6 +1,11 @@
-<%= render "devise/shared/second-header"%>
+<%# ログインページ %>
 
+<%# ヘッダー部分の呼び出し %>
+<%= render "shared/second-header"%>
+
+<%# ログインの入力フォーム作成、userモデルへ情報を移行 %>
 <%= form_with model: @user, url: user_session_path, class: 'registration-main', local: true do |f| %>
+
 <div class='form-wrap'>
   <div class='form-header'>
     <h1 class='form-header-text'>
@@ -11,6 +16,7 @@
     <%= flash[:notice] %>
     <%= flash[:alert] %>
   </div>
+  <%# /ログインの際入力する値 %>
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">メールアドレス</label>
@@ -26,9 +32,13 @@
     <%= f.password_field :password, class:"input-default", id:"password", placeholder:"" %>
   </div>
   <div class='login-btn'>
+  <%# /ログインの際入力する値 %>
+
+    <%# ログインボタン %>
     <%= f.submit "ログイン" ,class:"login-red-btn" %>
   </div>
 </div>
 <% end %>
 
-<%= render "devise/shared/second-footer"%>
+<%# フッターの呼び出し %>
+<%= render "shared/second-footer"%>

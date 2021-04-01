@@ -1,6 +1,9 @@
-<%= render "shared/header" %>
-<div class='main'>
+<%# トップページ %>
 
+<%# ヘッダー呼び出し %>
+<%= render "shared/header" %>
+
+<div class='main'>
   <%# 画面上部の「人生を変えるフリマアプリ」帯部分 %>
   <div class='title-contents'>
     <h2 class='service-title'>
@@ -126,9 +129,11 @@
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
 
+      <%# 出品した商品が確認できるコード %>
       <% @items.each do |item| %>
+      <%# 出品した商品の写真を確認できる %>
       <li class='list'>
-        <%= link_to "#" do %>
+        <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
 
@@ -139,6 +144,7 @@
           <%# //商品が売れていればsold outを表示しましょう %>
 
         </div>
+        <%# 出品した商品の商品名・値段・配送料の負担を確認できる %>
         <div class='item-info'>
           <h3 class='item-name'>
             <%= item.product %>
@@ -155,6 +161,7 @@
       </li>
       <% end %>
 
+      <%# 出品されている商品がなければダミー商品を表示する %>
       <% if @items.length == 0 %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -179,6 +186,7 @@
   </div>
   <%# /商品一覧 %>
 </div>
+<%# 商品出品ページへ遷移するボタン %>
 <%= link_to(new_item_path, class: 'purchase-btn') do %>
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>

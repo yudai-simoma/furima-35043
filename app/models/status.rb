@@ -1,4 +1,4 @@
-#商品出品（商品の状態）
+# 商品出品（商品の状態）
 class Status < ActiveHash::Base
   self.data = [
     { id: 1, name: '--' },
@@ -7,9 +7,9 @@ class Status < ActiveHash::Base
     { id: 4, name: '目立った傷や汚れなし' },
     { id: 5, name: 'やや傷や汚れあり' },
     { id: 6, name: '傷や汚れあり' },
-    { id: 7, name: '全体的に状態が悪い' },
+    { id: 7, name: '全体的に状態が悪い' }
   ]
-  #itemモデルとのアソシエーション
+  # itemモデルとのアソシエーション
   include ActiveHash::Associations
   has_many :items
-end 
+end

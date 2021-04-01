@@ -1,4 +1,4 @@
-#商品出品（カテゴリー）
+# 商品出品（カテゴリー）
 class Category < ActiveHash::Base
   self.data = [
     { id: 1, name: '--' },
@@ -11,9 +11,9 @@ class Category < ActiveHash::Base
     { id: 8, name: '家電・スマホ・カメラ' },
     { id: 9, name: 'スポーツ・レジャー' },
     { id: 10, name: 'ハンドメイド' },
-    { id: 11, name: 'その他' },
+    { id: 11, name: 'その他' }
   ]
-  #itemモデルとのアソシエーション
+  # itemモデルとのアソシエーション
   include ActiveHash::Associations
   has_many :items
-end 
+end
