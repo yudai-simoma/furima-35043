@@ -74,8 +74,10 @@ RSpec.describe PurchaserAddress, type: :model do
         @purchaser_address.valid?
         expect(@purchaser_address.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
-      it 'クレジットカード情報が空では保存できないこと' do
-        
+      it 'tokenが空では登録できないこと' do
+        @purchaser_address.token = nil
+        @purchaser_address.valid?
+        expect(@purchaser_address.errors.full_messages).to include("Token can't be blank")
       end
       it 'userが紐付いていないと保存できないこと' do
         @purchaser_address.user_id = nil
