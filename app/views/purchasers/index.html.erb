@@ -33,6 +33,10 @@
     </div>
     <%# /支払額の表示 %>
 
+    <%# 保存に失敗したらエラーが表示されるように部分テンプレートを呼び出している %>
+    <%# modelに関しては、「f.object」を使用してもいいがその場合はform_withの中に入れなけらばならない %>
+    <%= render 'shared/error_messages', model: @purchaser_address %>
+
     <%# createアクションへ情報を移行する %>
     <%= form_with model: @purchaser_address, url: item_purchasers_path(@item.id),id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%# カード情報の入力 %>
