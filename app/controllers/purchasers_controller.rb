@@ -32,12 +32,12 @@ before_action :authenticate_user!, except: :index
 
   def pay_item
     # 決済処理を行っているコード
-    Payjp.api_key = "sk_test_3e6d48bad5c1ca58c74ea109"  # 自身のPAY.JPテスト秘密鍵
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵（環境変数に設定）
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
       card: purchaser_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
-  
+
 end
