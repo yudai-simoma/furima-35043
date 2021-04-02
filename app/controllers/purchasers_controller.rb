@@ -4,6 +4,7 @@ before_action :authenticate_user!, except: :index
  
   #商品購入ページを表示
   def index
+    #itenモデルの情報を代入、paramsは「:id」ではなく「:item_id」とする
     @item = Item.find(params[:item_id])
     # form_withのmodelオプションで指定することができるコード
     @purchaser_address = PurchaserAddress.new
@@ -17,6 +18,8 @@ before_action :authenticate_user!, except: :index
       @purchaser_address.save
       redirect_to root_path
     else
+      #itenモデルの情報を代入、paramsは「:id」ではなく「:item_id」とする
+      @item = Item.find(params[:item_id])
       render :index
     end
   end
