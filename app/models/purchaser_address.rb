@@ -9,7 +9,7 @@ class PurchaserAddress
     #アソシエーションが組めないためバリデーションを記載
     validates :user_id
     validates :item_id
-    validates :purchaser_id
+    #validates :purchaser_id
     validates :postal_code, format: { with:/\A\d{3}[-]\d{4}\z/, message: 'is invalid. Input correctly'}
     validates :prefecture_id
     validates :city
