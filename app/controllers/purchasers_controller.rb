@@ -1,18 +1,24 @@
 class PurchasersController < ApplicationController
 #ログイン状態によって表示するページを切り替えるコードでログインしていなければ、ログイン画面に遷移さる。
-before_action :authenticate_user!, except: :index
- 
+before_action :authenticate_user!, only: [:index, :create]
+#各アクションで使用しているコードを１つにまとめる
+before_action :set_item, only: [:index, :create, :redirect_root, :move_to_root]
+#ログインしていて、自分の出品した商品ページへ遷移しようとするとトップページへ遷移する
+before_action :redirect_root, only:[:index, :create]
+#購入済みの商品購入ページへはいけないようにする
+before_action :move_to_root, only: :index
+
   #商品購入ページを表示
   def index
     #itenモデルの情報を代入、paramsは「:id」ではなく「:item_id」とする
-    @item = Item.find(params[:item_id])
+    #before_actionで呼び出している
     # form_withのmodelオプションで指定することができるコード
     @purchaser_address = PurchaserAddress.new
   end
 
   #商品購入の保存
   def create
-    @item = Item.find(params[:item_id])
+    #before_actionで呼び出している
     @purchaser_address = PurchaserAddress.new(purchaser_params)
     #バリデーションを実行する機能がないため,バリデーションを持たせる
     if @purchaser_address.valid?
@@ -40,4 +46,24 @@ before_action :authenticate_user!, except: :index
     )
   end
 
+  #before_actionで同じコードをまとめた
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  # ログインしていて、自分の出品した商品ページへ遷移しようとするとトップページへ遷移する
+  def redirect_root
+    #before_actionで呼び出している
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    end
+  end
+
+  #購入済みの商品購入ページへはいけないようにする
+  def move_to_root
+    #before_actionで呼び出している
+    if @item.purchaser.present?
+      redirect_to root_path
+    end
+  end
 end
