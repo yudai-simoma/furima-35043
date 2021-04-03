@@ -2,9 +2,12 @@ class ItemsController < ApplicationController
   #ログイン状態によって表示するページを切り替えるコードでログインしていなければ、ログイン画面に遷移さる。
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   #各アクションで使用しているコードを１つにまとめる
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :move_to_root]
   #ログインしていて、出品したユーザーとログインユーザーが違かったら編集ページに行けないように制限している
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  #購入済みの商品編集ページへいけないようにする
+  before_action :move_to_root, only: :edit
+
 
   # トップページを表示
   def index
@@ -53,7 +56,6 @@ class ItemsController < ApplicationController
       redirect_to root_path
     end
   end
-end
 
 private
 
@@ -74,3 +76,12 @@ private
       redirect_to action: :index
     end
   end
+
+  #購入済みの商品編集ページへはいけないようにする
+  def move_to_root
+    #before_actionで呼び出している
+    if @item.purchaser.present?
+      redirect_to root_path
+    end
+  end
+end
