@@ -28,17 +28,17 @@
       </span>
     </div>
 
-    <%# /ログイン状態かつ出品者かどうかの条件いよって表示するボタンを決めている %>
-    <% if user_signed_in? && current_user.id == @item.user_id %>
-    <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-    <p class="or-text">or</p>
-    <%= link_to "削除", item_path, method: :delete, class:"item-destroy" %>
+    <%# /ログイン状態かつ商品が出品中かどうかの条件によって表示するボタンを決めている %>
+    <% if user_signed_in? && @item.purchaser.blank? %>
+      <%# 商品詳細画面にアクセスしたユーザーが出品者であるかどうか %>
+      <% if current_user.id == @item.user_id %>
+      <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+      <p class="or-text">or</p>
+      <%= link_to "削除", item_path, method: :delete, class:"item-destroy" %>
+      <% else %>
+      <%= link_to "購入画面に進む", item_purchasers_path(@item.id), class:"item-red-btn"%>
+      <% end %>
     <% end %>
-
-    <% if user_signed_in? && current_user.id != @item.user_id %>
-    <%= link_to "購入画面に進む", item_purchasers_path(@item.id), class:"item-red-btn"%>
-    <% end %>
-    <%# /ログイン状態かつ出品者かどうかの条件いよって表示するボタンを決めている %>
     
     <%# /商品の情報 %>
     <div class="item-explain-box">
