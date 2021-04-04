@@ -4,10 +4,8 @@ class ItemsController < ApplicationController
   #各アクションで使用しているコードを１つにまとめる
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   #ログインしていて、出品したユーザーとログインユーザーが違かったら編集ページに行けないように制限している
+  #または購入済みの商品編集ページへはいけないようにする
   before_action :move_to_index, only: [:edit, :update, :destroy]
-  #購入済みの商品編集ページ・削除機能へいけないようにする
-  before_action :move_to_root, only: [:edit, :update, :destroy]
-
 
   # トップページを表示
   def index
@@ -71,17 +69,11 @@ private
   end
   
   #編集ページにアクセスする際、投稿したユーザーでないとアクセスできないように条件分岐している
+  #または購入済みの商品編集ページへはいけないようにする
   def move_to_index
-    unless current_user.id == @item.user_id
+    if current_user.id != @item.user_id || @item.purchaser.present?
       redirect_to action: :index
     end
   end
 
-  #購入済みの商品編集ページへはいけないようにする
-  def move_to_root
-    #@itemの定義は、editアクションで定義済み
-    if @item.purchaser.present?
-      redirect_to root_path
-    end
-  end
 end

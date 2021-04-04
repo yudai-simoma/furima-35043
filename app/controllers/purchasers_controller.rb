@@ -4,9 +4,8 @@ before_action :authenticate_user!, only: [:index, :create]
 #各アクションで使用しているコードを１つにまとめる
 before_action :set_item, only: [:index, :create]
 #ログインしていて、自分の出品した商品ページへ遷移しようとするとトップページへ遷移する
+#または購入済みの商品購入ページへはいけないようにする
 before_action :redirect_root, only:[:index, :create]
-#購入済みの商品購入ページへはいけないようにする
-before_action :move_to_root, only: [:index, :create]
 
   #商品購入ページを表示
   def index
@@ -51,19 +50,13 @@ before_action :move_to_root, only: [:index, :create]
     @item = Item.find(params[:item_id])
   end
 
-  # ログインしていて、自分の出品した商品ページへ遷移しようとするとトップページへ遷移する
+  # ログインしていて、自分の出品した商品の購入ページへ遷移しようとするとトップページへ遷移する
+  # または、購入済みの商品購入ページへはいけないようにする
   def redirect_root
     #@itemの定義は、indexアクションで定義済み
-    if current_user.id == @item.user_id
+    if current_user.id == @item.user_id || @item.purchaser.present?
       redirect_to root_path
     end
   end
 
-  #購入済みの商品購入ページへはいけないようにする
-  def move_to_root
-    #@itemの定義は、indexアクションで定義済み
-    if @item.purchaser.present?
-      redirect_to root_path
-    end
-  end
 end
