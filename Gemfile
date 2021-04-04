@@ -59,14 +59,16 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :development do
   gem 'rubocop', require: false
 end
-
+#ユーザー登録機能の実装で使用する
 gem "devise"
-
+#binding.pryを使用可能にする
 gem 'pry-rails'
-
+#画像投稿及び画像の編集を可能にする
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
-
+#アクティブハッシュを使用可能にする
 gem 'active_hash'
-
+#クレジットカード機能の実装で使用する
 gem 'payjp'
+#S3を使用可能にする
+gem "aws-sdk-s3", require: false
