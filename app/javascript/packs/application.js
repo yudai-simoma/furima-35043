@@ -4,11 +4,13 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
+// 手作業でJavaScriptを記述する場合は、このturbolinksがその処理を無効にしてしまうことがあるため今回は使用しない
 //require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 //item_price.jsを読み込む記述
-require("../item_price");
+require("../item_price")
+require("../card")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
