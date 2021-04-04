@@ -49,6 +49,11 @@ RSpec.describe PurchaserAddress, type: :model do
         @purchaser_address.valid?
         expect(@purchaser_address.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it 'prefecture_idの値が1だど保存できないこと' do
+        @purchaser_address.prefecture_id = 1
+        @purchaser_address.valid?
+        expect(@purchaser_address.errors.full_messages).to include("Prefecture must be other than 1")
+      end
       it 'cityが空では保存できないこと' do
         @purchaser_address.city = ''
         @purchaser_address.valid?
@@ -64,13 +69,18 @@ RSpec.describe PurchaserAddress, type: :model do
         @purchaser_address.valid?
         expect(@purchaser_address.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberの値が11桁でないと保存できないこと' do
-        @purchaser_address.phone_number = '123456789'
+      it 'phone_numberの値が11桁以上だと保存できないこと' do
+        @purchaser_address.phone_number = '1234567891112'
         @purchaser_address.valid?
         expect(@purchaser_address.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
-      it 'phone_numberの値が全角だとでないと保存できないこと' do
+      it 'phone_numberの値が全角だと保存できないこと' do
         @purchaser_address.phone_number = '１２３４５６７８９'
+        @purchaser_address.valid?
+        expect(@purchaser_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+      it 'phone_numberの値が英数字混合では保存できないこと' do
+        @purchaser_address.phone_number = 'abcde123456'
         @purchaser_address.valid?
         expect(@purchaser_address.errors.full_messages).to include("Phone number is invalid. Input only number")
       end

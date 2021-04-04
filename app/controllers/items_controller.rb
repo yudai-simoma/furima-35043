@@ -5,8 +5,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   #ログインしていて、出品したユーザーとログインユーザーが違かったら編集ページに行けないように制限している
   before_action :move_to_index, only: [:edit, :update, :destroy]
-  #購入済みの商品編集ページへいけないようにする
-  before_action :move_to_root, only: [:edit, :update]
+  #購入済みの商品編集ページ・削除機能へいけないようにする
+  before_action :move_to_root, only: [:edit, :update, :destroy]
 
 
   # トップページを表示
