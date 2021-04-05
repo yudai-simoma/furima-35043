@@ -72,3 +72,7 @@ gem 'active_hash'
 gem 'payjp'
 #S3を使用可能にする
 gem "aws-sdk-s3", require: false
+#Unicornのインストール
+group :production do
+  gem 'unicorn', '5.4.1'
+end
