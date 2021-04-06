@@ -78,6 +78,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 2vh 0;
+  /* position: relative; */
 }
 
 .click-upload {
@@ -89,6 +90,13 @@
   margin-bottom: 15px;
 }
 
+.blob_image{
+  width: 130px;
+  height: 170px;
+  /* position: absolute;
+  top: 30px;
+  left: 150px; */
+}
 /* /出品画像 */
 
 /* 商品名と商品説明 */
