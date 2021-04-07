@@ -28,7 +28,7 @@
       imageElement.appendChild(inputHTML);
       ImageList.appendChild(imageElement);
 
-      if (document.URL.match( /edit/ )){
+      if (document.getElementById("images")) {
         // 2枚目以降の画像にもイベント発火するように実装
         inputHTML.addEventListener('change', (e) => {
           file = e.target.files[0];

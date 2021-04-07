@@ -1,3 +1,4 @@
+<%# 商品編集ページ %>
 <%# cssは商品出品のものを併用しています。
 app/assets/stylesheets/items/new.css %>
 
@@ -7,7 +8,7 @@ app/assets/stylesheets/items/new.css %>
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, local: true do |f| %>
+    <%= form_with model: @item, id: "images", local: true do |f| %>
 
     <%# 保存に失敗したらエラーが表示されるように部分テンプレートを呼び出している %>
     <%= render 'shared/error_messages', model: f.object %>
