@@ -1,5 +1,6 @@
 window.addEventListener('load', () => {
-
+  if (!document.getElementById("item-image")) {return false}
+  
   // 金額を入力した数値をpriceInputという変数に格納する
   const priceInput = document.getElementById("item-price");
   // 販売手数料が表示される数値をtaxInputという変数に格納する

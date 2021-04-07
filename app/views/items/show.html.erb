@@ -10,12 +10,14 @@
     </h2>
     <%# 商品の写真表示 %>
     <div class="item-img-content">
-      <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示 %>
-      <% if @item.purchaser.present? %>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div>
+      <% @item.images.each do |image| %>
+        <%= image_tag image, class:"item-box-img" %>
+        <%# 商品が売れている場合は、sold outを表示 %>
+        <% if @item.purchaser.present? %>
+        <div class="sold-out">
+          <span>Sold Out!!</span>
+        </div>
+        <% end %>
       <% end %>
     </div>
     <%# 商品の値段・出品者名を表示 %>
