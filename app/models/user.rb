@@ -8,12 +8,12 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
     # 以下、1字以上の全角ひらがな、全角カタカナ、漢字にマッチ
-    with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'が不適切です。全角で入力して下さい。' } do
+    with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'が不適切です。全角で入力して下さい' } do
       validates :last_name
       validates :first_name
     end
     # 以下、1字以上の全角カタカナにマッチ
-    with_options format: { with: /\A[ァ-ヶー]+\z/, message: 'が不適切です。全角カタカナ文字で入力して下さい。' } do
+    with_options format: { with: /\A[ァ-ヶー]+\z/, message: 'が不適切です。全角カタカナ文字で入力して下さい' } do
       validates :last_name_kana
       validates :first_name_kana
     end
