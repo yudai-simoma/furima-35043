@@ -7,14 +7,14 @@ class PurchaserAddress
   #purchasersモデルとaddressesモデルのバリデーションを記述
   with_options presence: true do
     #アソシエーションが組めないためバリデーションを記載
+    validates :token
     validates :user_id
     validates :item_id
-    validates :postal_code, format: { with:/\A\d{3}[-]\d{4}\z/, message: 'is invalid. Input correctly'}
-    validates :prefecture_id, numericality: { other_than: 1 }
+    validates :postal_code, format: { with:/\A\d{3}[-]\d{4}\z/, message: 'はハイフンを入れ入力して下さい'}
+    validates :prefecture_id, numericality: { other_than: 1, message: 'は、--以外を選択して下さい' }
     validates :city
     validates :house_number
-    validates :phone_number, format: { with:/\A\d{1,11}\z/, message: 'is invalid. Input only number'}
-    validates :token
+    validates :phone_number, format: { with:/\A\d{10,11}\z/, message: 'は10桁または11桁の値を入力して下さい'}
   end
 
   #フォームから送られてきたデータをテーブルに保存する処理
