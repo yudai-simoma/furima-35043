@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   # トップページを表示
   def index
     # 商品の情報を代入かつ新しい順に表示
-    @items = Item.all.order('product DESC')
+    @items = Item.all.order('id DESC')
   end
 
   # 商品出品ページを表示
@@ -24,6 +24,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
+      @item.images = nil
       render new_item_path
     end
   end
@@ -61,7 +62,7 @@ private
   #imteモデルの情報から所得する制限をかけた
   def item_params
     params.require(:item).permit(:product, :product_description, :category_id, :status_id, :ship_base_id, :prefecture_id,
-                                :ship_date_id, :price, :image).merge(user_id: current_user.id)
+                                :ship_date_id, :price, images: []).merge(user_id: current_user.id)
   end
 
   #before_actionで同じコードをまとめた

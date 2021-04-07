@@ -6,7 +6,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, local: true do |f| %>
+    <%= form_with model: @item, id: "item-image", local: true do |f| %>
 
     <%# 正しく保存されない場合エラーが出るよう、部分テンプレートを呼び出している %>
     <%= render 'shared/error_messages', model: f.object %>
@@ -17,14 +17,17 @@
         出品画像
         <span class="indispensable">必須</span>
       </div>
-      <%# プレビューを表示する場所 %>
-        <div id="image-list">
-        </div>
+      <% @item.images.each do |image| %>
+        <%= image_tag @item.images[0], class:"item-box-img" %>
+      <% end %>
       <div class="click-upload">
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%= f.file_field :images, name: 'item[images][]', id:"item-image" %>
+      </div>
+      <%# プレビューを表示する場所 %>
+      <div id="image-list">
       </div>
     </div>
     <%# /出品画像 %>

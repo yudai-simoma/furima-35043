@@ -15,14 +15,14 @@ class Item < ApplicationRecord
               numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                               message: 'is invalid. Input 300 ~ 9,999,999 numerical value. ' }
 
-    validates :image
+    validates :images
   end
 
   # アソシエーションを追加
   belongs_to :user
   has_one  :purchaser
   # 画像ファイルの紐付け
-  has_one_attached :image
+  has_many_attached :images
   # ActiveHashのアソシエーションを設定
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
