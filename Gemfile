@@ -82,3 +82,5 @@ gem "aws-sdk-s3", require: false
 group :production do
   gem 'unicorn', '5.4.1'
 end
+#エラー文を日本語化させる
+gem 'rails-i18n'
