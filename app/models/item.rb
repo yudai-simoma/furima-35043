@@ -14,7 +14,7 @@ class Item < ApplicationRecord
     end
     validates :price,
               numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
-                              message: 'は、300円から9,999,999円までで入力して下さい' }
+                              message: 'は、300円から9,999,999円までの半角数字で入力して下さい' }
   end
 
   # アソシエーションを追加

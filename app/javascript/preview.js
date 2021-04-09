@@ -1,5 +1,6 @@
 // if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
   document.addEventListener('DOMContentLoaded', function(){
+    // 出品及び編集ページのみ処理が行われるよう条件分岐した
     if (!document.getElementById("item-image")) {return false}
     const ImageList = document.getElementById('image-list');
 
@@ -40,11 +41,16 @@
     }
 
     document.getElementById('item-image').addEventListener('change', function(e){
-      // 編集ページは元の画像は削除してからプレビューを出す
-      // const imageContent = document..querySelector("item-box-img");
-      // if (imageContent){
-      //   imageContent.remove();
-      // }
+      if (document.getElementById("images")) {
+        // // 編集ページは元の画像は削除してからプレビューを出す
+        const imageContent = document.getElementsByClassName("item-box-img");
+        console.log(imageContent)
+        if (imageContent){
+          while (imageContent.length) {
+            imageContent.item(0).remove()
+          }
+        }
+      }
 
       // 選択した画像情報を変数に代入
       const file = e.target.files[0];
