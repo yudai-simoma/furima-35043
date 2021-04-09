@@ -1,4 +1,5 @@
 window.addEventListener('load', () => {
+  // 出品及び編集ページのみ処理が行われるよう条件分岐した
   if (!document.getElementById("item-image")) {return false}
   
   // 金額を入力した数値をpriceInputという変数に格納する

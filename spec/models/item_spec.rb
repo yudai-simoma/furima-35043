@@ -80,27 +80,27 @@ RSpec.describe Item, type: :model do
       it 'priceが半角英字であれば保存できないこと' do
         @item.price = 'aaa'
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までで入力して下さい')
+        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までの半角数字で入力して下さい')
       end
       it 'priceが全角英字であれば保存できないこと' do
         @item.price = 'ａａａ'
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までで入力して下さい')
+        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までの半角数字で入力して下さい')
       end
       it 'priceが全角数字であれば保存できないこと' do
         @item.price = '１０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までで入力して下さい')
+        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までの半角数字で入力して下さい')
       end
       it 'priceの値が299円以下では出品できないこと' do
         @item.price = 200
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までで入力して下さい')
+        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までの半角数字で入力して下さい')
       end
       it 'priceの値が10,000,000円以上では出品できないこと' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までで入力して下さい')
+        expect(@item.errors.full_messages).to include('販売価格は、300円から9,999,999円までの半角数字で入力して下さい')
       end
       it 'imageが空では保存できないこと' do
         @item.images = nil

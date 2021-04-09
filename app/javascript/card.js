@@ -1,4 +1,7 @@
 const pay = () => {
+  // 購入ページのみ処理が行われるよう条件分岐した
+  if (!document.getElementById("charge-form")) {return false}
+
   // PAY.JPテスト公開鍵
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY); 
   // フォーム送信時にイベントが発火するコード
